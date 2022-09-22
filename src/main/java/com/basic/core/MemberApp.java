@@ -8,7 +8,12 @@ import com.basic.core.member.MemberServiceImpl;
 public class MemberApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+
+        //이 memberService는 memberServiceImpl을 뱉어내는 appConfig임.
+        MemberService memberService = appConfig.memberService();
+
+//        MemberService memberService = new MemberServiceImpl(); 원래 여기서 메모리멤버를 자기가 생성시켰음
 
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
