@@ -1,6 +1,9 @@
 package com.basic.core;
 
+import com.basic.core.discount.DiscountPolicy;
 import com.basic.core.discount.FixDiscountPolicy;
+import com.basic.core.discount.RateDiscountPolicy;
+import com.basic.core.member.MemberRepository;
 import com.basic.core.member.MemberService;
 import com.basic.core.member.MemberServiceImpl;
 import com.basic.core.member.MemoryMemberRepository;
@@ -9,12 +12,25 @@ import com.basic.core.order.OrderServiceImpl;
 
 public class AppConfig {
 
+    //서비스역할
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
+    //레포지토리 역할
+    private MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    //서비스역할
     public OrderService orderService(){
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    //구현체
+    private DiscountPolicy discountPolicy() {
+//        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
 
 }
