@@ -6,7 +6,10 @@ import com.basic.core.discount.RateDiscountPolicy;
 import com.basic.core.member.Member;
 import com.basic.core.member.MemberRepository;
 import com.basic.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 
@@ -17,6 +20,7 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;
 
     //생성자 생성
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

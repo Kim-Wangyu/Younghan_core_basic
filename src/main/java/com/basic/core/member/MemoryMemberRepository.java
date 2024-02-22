@@ -1,8 +1,11 @@
 package com.basic.core.member;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>(); //실무에서는 동시성 Issue때문에 동시성Concurency를 써야함
